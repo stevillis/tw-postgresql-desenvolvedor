@@ -1,0 +1,28 @@
+CREATE TABLE CLI_CLIENTES 
+(
+	CLI_ID SERIAL PRIMARY KEY,
+	CLI_NOME VARCHAR(50) NOT NULL,
+	CLI_CPF CHAR(11) NOT NULL,
+	CLI_ENDERECO VARCHAR(100)
+);
+
+ALTER TABLE CLI_CLIENTES ADD CONSTRAINT UN_CLI_CPF UNIQUE(CLI_CPF);
+
+/* 
+Cardinalidade
+
+CLIENTE (Entidade forte - não depende de outra entidade para existir)
+| 1
+|
+|
+|
+| N
+NOTA FISCAL (Entidade fraca/anênica - depende da entidade Cliente para existir)
+*/
+
+CREATE TABLE NFE_NOTAS_FISCAIS
+(
+	NFE_ID SERIAL PRIMARY KEY,
+	NFE_DATA_EMISSAO TIMESTAMP NOT NULL,
+	NFE_CHAVE_CONSULTA VARCHAR(100)
+);
