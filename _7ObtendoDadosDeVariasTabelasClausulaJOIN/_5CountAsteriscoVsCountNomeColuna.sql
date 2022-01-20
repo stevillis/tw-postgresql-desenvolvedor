@@ -1,0 +1,21 @@
+-- COUNT(NOME_COLUNA) ignora toda linha onde NOME_COLUNA é NULL
+SELECT 
+	cli.CLI_NOME,
+	COUNT(nfe.NFE_ID) AS QUANTIDADE_COMPRAS
+FROM geral.CLI_CLIENTES cli
+LEFT JOIN financeiro.NFE_NOTAS_FISCAIS nfe ON cli.CLI_ID = nfe.CLI_ID
+GROUP BY cli.CLI_NOME
+ORDER BY COUNT(nfe.NFE_ID) DESC,
+	cli.CLI_NOME
+;
+
+-- COUNT(*) considera qualquer coluna não nula em uma linha
+SELECT 
+	cli.CLI_NOME,
+	COUNT(*) AS QUANTIDADE_COMPRAS
+FROM geral.CLI_CLIENTES cli
+LEFT JOIN financeiro.NFE_NOTAS_FISCAIS nfe ON cli.CLI_ID = nfe.CLI_ID
+GROUP BY cli.CLI_NOME
+ORDER BY COUNT(*) DESC,
+	cli.CLI_NOME
+;
